@@ -15,9 +15,8 @@ import Datos from './pages/Datos'
 import { authService } from './services/authService'
 import { useLocale } from './context/LocaleContext'
 
-// ─── Demo mode ────────────────────────────────────────────
-// Set VITE_DEMO_MODE=true in .env.local to bypass login
-const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true'
+// Public dashboard — login screen is bypassed; site is protected by middleware password
+const DEMO_MODE = true
 
 const PAGE_TITLES = {
   '/panel':         'nav.panel',
