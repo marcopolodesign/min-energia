@@ -16,8 +16,8 @@ import { authService } from './services/authService'
 import { useLocale } from './context/LocaleContext'
 
 // ─── Demo mode ────────────────────────────────────────────
-// Set VITE_DEMO_MODE=true in .env.local to bypass login
-const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true'
+// Temporarily hardcoded true — restore to env var check when Supabase is wired up
+const DEMO_MODE = true
 
 const PAGE_TITLES = {
   '/panel':         'nav.panel',
