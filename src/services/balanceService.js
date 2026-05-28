@@ -4,7 +4,9 @@ import {
   BALANCE_ANUAL,
 } from '../lib/mockData'
 
-const DEMO = import.meta.env.VITE_DEMO_MODE === 'true'
+// Use mock data only when Supabase isn't configured (placeholder URL)
+const DEMO = !import.meta.env.VITE_SUPABASE_URL ||
+             import.meta.env.VITE_SUPABASE_URL.includes('your-project')
 
 const MONTHS_ES = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
