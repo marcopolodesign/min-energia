@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Trabajo — Datos ReSEF · Ministerio de Energía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:        #e66065;
+      --accent-light:  #f5b5b8;
+      --accent-bg:     rgba(245, 181, 184, 0.18);
+      --black:         #000;
+      --white:         #fff;
+      --gray:          #999;
+      --border:        #d1d5db;
+      --bg:            #f8f8f8;
+      --font-display:  'Bebas Neue', system-ui, sans-serif;
+      --font-body:     'Inter', system-ui, sans-serif;
+      --px:            10.5vw;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── Sticky header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo svg { height: 22px; width: auto; color: var(--accent); fill: currentColor; }
+
+    nav { display: flex; gap: 24px; }
+    nav a {
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: .06em;
+      text-decoration: none;
+      color: var(--gray);
+      transition: color .15s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── Top bar ── */
+    .topbar {
+      border-bottom: 1px solid var(--border);
+      padding: 20px var(--px);
+    }
+    .topbar-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      font-family: var(--font-display);
+      font-size: 15px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .topbar-inner .key  { color: var(--black); }
+    .topbar-inner .val  { color: var(--accent); }
+    .topbar-inner .sep  { color: var(--border); }
+
+    /* ── Scope note ── */
+    .scope-note {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 12px var(--px);
+      font-size: 12.5px;
+      color: var(--gray);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .scope-note .ast { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .scope-note strong { color: var(--black); }
+
+    /* ── Main content ── */
+    main { padding: 64px var(--px) 100px; }
+
+    /* ── Section: two-column ── */
+    .section {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 40px 56px;
+      margin-bottom: 88px;
+    }
+    .section-left {
+      grid-column: 1 / 5;
+      position: sticky;
+      top: 104px;
+      align-self: start;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .section-bar {
+      width: 3px;
+      min-height: 40px;
+      background: var(--accent-light);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 34px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .section-right { grid-column: 5 / 13; }
+
+    /* ── Content box ── */
+    .content-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 32px;
+      background: var(--accent-bg);
+      margin-bottom: 28px;
+    }
+    .content-box h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .content-box p, .content-box li { color: var(--black); font-size: 14.5px; }
+    .content-box ul { padding-left: 18px; }
+    .content-box li { margin-bottom: 6px; }
+    .content-box strong { font-weight: 600; }
+
+    /* ── Boxed list ── */
+    .boxed-list {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 32px;
+      background: var(--accent-bg);
+      margin-bottom: 28px;
+    }
+    .boxed-list h3 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+    }
+    .boxed-list ul { list-style: none; }
+    .boxed-list li {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--black);
+    }
+    .boxed-list li:last-child { border-bottom: none; padding-bottom: 0; }
+    .boxed-list li .bullet { color: var(--accent); margin-top: 1px; flex-shrink: 0; }
+
+    /* ── Entregable cards ── */
+    .entregable-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .entregable-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 22px;
+      background: var(--white);
+    }
+    .entregable-card.full { grid-column: 1 / -1; }
+    .entregable-card .e-num {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .entregable-card .e-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .entregable-card .e-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 100px;
+      border: 1px solid;
+    }
+    .tag.pub  { background: #fff0f0; color: var(--accent); border-color: var(--accent-light); }
+    .tag.int  { background: #f5f5f5; color: #555; border-color: #d1d5db; }
+    .tag.easy { background: #f0fff4; color: #276749; border-color: #9ae6b4; }
+    .tag.mid  { background: #fffbeb; color: #b7791f; border-color: #fbd38d; }
+    .tag.hard { background: #faf5ff; color: #553c9a; border-color: #d6bcfa; }
+    .tag.par  { background: #ebf8ff; color: #2b6cb0; border-color: #bee3f8; }
+    .entregable-card .e-desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+    /* ── Track labels ── */
+    .track-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .track-label.pub-track { color: var(--accent); }
+    .track-label.int-track { color: #2b6cb0; }
+
+    /* ── Gantt chart ── */
+    .gantt-wrap {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .gantt-header {
+      display: grid;
+      grid-template-columns: 210px repeat(9, 1fr);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .gantt-header-label {
+      padding: 10px 14px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border-right: 1px solid var(--border);
+    }
+    .gantt-header-month {
+      padding: 10px 6px;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .gantt-header-month:last-child { border-right: none; }
+    .gantt-header-month.hl { color: var(--accent); }
+
+    .gantt-row {
+      display: grid;
+      grid-template-columns: 210px repeat(9, 1fr);
+      border-bottom: 1px solid var(--border);
+      min-height: 48px;
+      align-items: center;
+    }
+    .gantt-row:last-child { border-bottom: none; }
+    .gantt-row:hover { background: rgba(230, 96, 101, .03); }
+    .gantt-row.int-row:hover { background: rgba(43, 108, 176, .03); }
+
+    .gantt-label {
+      padding: 10px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--black);
+      border-right: 1px solid var(--border);
+      line-height: 1.3;
+    }
+    .gantt-label span {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+    .gantt-section-header .gantt-label {
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: .08em;
+      font-weight: 400;
+      color: var(--accent);
+      background: var(--bg);
+    }
+    .gantt-section-header.int-track .gantt-label { color: #2b6cb0; }
+    .gantt-section-header .gantt-cell { background: var(--bg); }
+
+    .gantt-cell {
+      height: 48px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .gantt-cell:last-child { border-right: none; }
+
+    .gantt-bar {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 16px;
+      border-radius: 4px;
+      background: var(--accent);
+      opacity: .8;
+    }
+    .gantt-bar.prep  { background: var(--accent-light); opacity: 1; }
+    .gantt-bar.int   { background: #90cdf4; opacity: .9; }
+    .gantt-bar.int-active { background: #3182ce; opacity: .8; }
+    .gantt-bar.full  { left: 4px; right: 4px; }
+    .gantt-bar.start { left: 4px; right: -4px; border-radius: 4px 0 0 4px; }
+    .gantt-bar.mid   { left: -4px; right: -4px; border-radius: 0; }
+    .gantt-bar.end   { left: -4px; right: 4px; border-radius: 0 4px 4px 0; }
+
+    .gantt-dot {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--accent);
+      z-index: 2;
+    }
+    .gantt-dot.int { background: #3182ce; box-shadow: 0 0 0 2px #3182ce; }
+
+    /* ── Detalle de fases ── */
+    .fase-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .fase-card.int-fase { border-left: 3px solid #90cdf4; }
+    .fase-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 22px;
+      background: var(--white);
+    }
+    .fase-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      line-height: 1;
+      color: var(--accent);
+      opacity: .2;
+      min-width: 48px;
+    }
+    .int-fase .fase-num { color: #3182ce; }
+    .fase-info { flex: 1; }
+    .fase-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2px;
+    }
+    .fase-periodo {
+      font-size: 12px;
+      color: var(--gray);
+      font-family: var(--font-display);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .fase-body {
+      padding: 16px 22px 20px;
+      background: var(--accent-bg);
+      border-top: 1px solid var(--border);
+    }
+    .int-fase .fase-body { background: rgba(235, 248, 255, 0.5); }
+    .fase-body p  { font-size: 13.5px; color: #333; margin-bottom: 10px; }
+    .fase-body p:last-child { margin-bottom: 0; }
+    .fase-body ul { padding-left: 18px; }
+    .fase-body li { font-size: 13.5px; color: #333; margin-bottom: 5px; }
+    .fase-body strong { font-weight: 600; color: var(--black); }
+    .fase-deliverable {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-top: 10px;
+    }
+    .fase-deliverable.int { background: #3182ce; }
+
+    /* ── Roles table ── */
+    .roles-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .roles-table th {
+      text-align: left;
+      padding: 8px 14px;
+      font-size: 10.5px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--gray);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .roles-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: #333; }
+    .roles-table tr:last-child td { border-bottom: none; }
+    .roles-table tr:hover td { background: rgba(230, 96, 101, .03); }
+    .roles-table td:first-child { font-weight: 600; color: var(--black); }
+
+    /* ── BID callout ── */
+    .bid-callout {
+      border: 1px solid var(--border);
+      border-left: 4px solid #2b6cb0;
+      border-radius: 10px;
+      padding: 20px 24px;
+      background: rgba(235, 244, 255, 0.4);
+      margin-bottom: 24px;
+    }
+    .bid-callout h4 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #2b6cb0;
+      margin-bottom: 8px;
+    }
+    .bid-callout p { font-size: 13.5px; color: #333; }
+    .bid-callout strong { font-weight: 600; color: var(--black); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px var(--px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--gray);
+    }
+    footer .logo svg { height: 16px; color: var(--accent); fill: currentColor; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      :root { --px: 6vw; }
+      .section { grid-template-columns: 1fr; gap: 24px; }
+      .section-left { grid-column: 1; position: static; }
+      .section-right { grid-column: 1; }
+      .entregable-grid { grid-template-columns: 1fr; }
+      .entregable-card.full { grid-column: 1; }
+.gantt-wrap { overflow-x: auto; }
+      .gantt-header, .gantt-row { min-width: 720px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HEADER ═══════════════════════ -->
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 105 28" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" fill-rule="evenodd"><g transform="translate(-1,-1)"><path d="M6.957,19.057 L6.212,22.04 C7.329,19.992 9.19,17.2 11.238,17.014 C11.618,16.935 12.013,17.038 12.306,17.294 C12.598,17.549 12.754,17.927 12.727,18.314 C12.556,19.386 12.307,20.443 11.982,21.479 C13.471,18.687 15.333,16.639 17.008,16.453 C17.869,16.35 18.67,16.91 18.87,17.753 C18.901,18.515 18.775,19.276 18.498,19.987 C18.091,21.565 17.594,23.119 17.009,24.64 C16.823,25.012 17.009,25.198 17.195,25.198 C17.567,25.198 18.684,24.081 19.243,23.336 C19.429,23.336 19.801,23.522 19.801,23.708 C18.875,25.728 16.978,27.133 14.775,27.431 C14.212,27.475 13.716,27.062 13.658,26.5 C13.629,26.058 13.692,25.616 13.844,25.2 C14.402,23.338 14.961,21.663 15.519,19.8 C15.645,19.441 15.708,19.063 15.705,18.683 C15.691,18.483 15.533,18.325 15.333,18.311 C15.147,18.311 14.402,18.87 13.658,20.173 C12.358,22.034 11.424,25.013 10.493,27.433 C10.307,27.991 10.121,27.991 9.562,27.991 C8.445,28.177 7.7,27.991 7.7,27.433 C7.7,27.061 8.817,23.152 9.562,20.359 C9.688,20 9.751,19.622 9.748,19.242 C9.734,19.042 9.576,18.884 9.376,18.87 C9.004,18.87 8.259,19.428 7.514,20.732 C6.266,23.039 5.268,25.473 4.536,27.992 C4.397,28.375 4.008,28.608 3.605,28.55 C2.488,28.736 1.744,28.55 1.744,27.992 C1.744,27.62 3.233,21.849 3.605,20.732 C3.791,19.801 3.791,19.615 3.419,19.801 C2.488,19.801 1.93,20.918 1.557,21.476 C1.371,21.476 0.999,21.29 0.999,21.104 C1.708,19.211 3.452,17.903 5.467,17.753 C7.143,17.568 7.143,18.313 6.957,19.057 Z"/><path d="M29.295,16.265 L29.667,14.965 C29.853,14.779 30.039,14.779 30.412,14.779 L31.343,14.779 C31.709,14.849 32.039,15.047 32.274,15.337 C31.529,17.757 30.785,20.737 30.04,23.528 C30.04,23.9 30.04,24.086 30.226,24.086 C31.119,23.669 31.889,23.028 32.46,22.225 C32.761,22.243 33.001,22.482 33.018,22.783 C32.019,24.516 30.324,25.737 28.364,26.134 C27.826,26.108 27.37,25.728 27.247,25.203 C27.231,24.822 27.295,24.442 27.433,24.086 L27.991,22.038 L27.809,22.038 C26.509,24.086 24.272,26.32 22.597,26.506 C21.852,26.506 20.922,25.948 20.922,25.206 C20.736,23.717 21.853,20.552 24.087,18.132 C25.157,16.779 26.676,15.855 28.369,15.526 C28.364,15.707 28.923,15.893 29.295,16.265 Z M27.62,17.01 C27.248,17.01 26.875,17.382 26.131,18.499 C25.009,20.176 24.083,22.776 24.269,24.27 L24.269,24.456 C24.283,24.656 24.441,24.814 24.641,24.828 C25.199,24.828 26.503,23.153 27.061,22.036 C27.806,20.736 28.55,18.685 28.922,17.936 C28.364,17.01 27.992,16.824 27.62,17.01 Z"/><path d="M43.257,15.52 C43.443,17.009 42.512,18.126 41.768,18.126 C41.21,18.126 41.21,17.754 41.023,17.009 C40.837,16.637 40.837,16.451 40.651,16.451 C40.279,16.451 39.72,17.568 39.162,18.871 C38.313,20.859 37.628,22.914 37.114,25.014 C36.888,25.408 36.448,25.628 35.997,25.572 C35.439,25.572 34.322,25.572 34.508,24.641 C35.066,22.221 35.625,19.615 36.183,17.381 C36.369,16.823 36.369,16.636 35.997,16.636 C35.625,16.636 34.697,17.567 34.136,18.311 C33.982,18.333 33.828,18.281 33.718,18.171 C33.608,18.061 33.556,17.907 33.578,17.753 C34.191,16.127 35.597,14.931 37.301,14.588 C38.79,14.402 38.976,15.519 38.601,16.822 L37.856,19.614 L38.042,19.614 C38.787,18.125 39.342,17.008 39.717,16.077 C40.462,14.96 41.017,14.216 41.951,14.029 C42.698,14.031 43.257,14.403 43.257,15.52 Z"/><path d="M43.443,21.849 C43.413,19.859 43.998,17.909 45.118,16.264 C46.057,14.742 47.627,13.718 49.399,13.472 C50.888,13.286 52.005,13.844 52.191,15.147 C52.269,15.577 52.144,16.02 51.854,16.346 C51.563,16.673 51.139,16.849 50.702,16.822 C50.196,16.888 49.719,16.57 49.585,16.077 C49.585,15.519 49.399,14.588 49.026,14.588 C48.653,14.588 48.095,15.146 47.726,16.263 C47.089,17.727 46.833,19.328 46.981,20.917 C47.167,22.034 47.539,22.592 48.098,22.406 C48.657,22.406 49.587,21.848 50.518,20.544 C50.672,20.522 50.827,20.574 50.937,20.684 C51.046,20.794 51.098,20.949 51.076,21.103 C50.131,22.884 48.411,24.124 46.422,24.456 C44.56,24.641 43.63,23.524 43.443,21.849 Z"/><path d="M62.803,15.707 C62.903,17.736 62.239,19.729 60.941,21.292 C59.9,22.521 58.438,23.318 56.841,23.526 C54.235,23.712 53.118,22.226 52.932,20.361 C52.809,18.184 53.544,16.045 54.98,14.404 C55.926,13.316 57.265,12.646 58.703,12.543 C61.5,12.17 62.617,13.845 62.803,15.707 Z M57.777,14.59 C57.032,15.89 55.729,18.871 55.916,21.29 C55.901,21.541 55.994,21.787 56.172,21.965 C56.35,22.143 56.596,22.236 56.847,22.221 C57.405,22.221 57.964,21.476 58.522,20.36 C59.385,18.493 59.829,16.46 59.822,14.403 C59.822,13.844 59.636,13.286 59.077,13.472 C58.708,13.473 58.335,13.845 57.777,14.59 Z"/><path d="M70.249,11.611 C70.621,11.611 70.807,11.425 70.994,11.425 C74.159,11.053 75.276,12.725 75.462,14.59 C75.602,16.221 75.063,17.837 73.973,19.058 C72.832,20.637 71.071,21.653 69.133,21.85 C68.751,21.88 68.368,21.816 68.016,21.664 C67.83,21.664 67.83,21.85 67.644,22.036 L66.899,25.387 C66.713,26.318 66.713,26.876 67.644,26.876 L68.759,26.876 C68.931,26.967 69.039,27.146 69.039,27.342 C69.039,27.537 68.931,27.716 68.759,27.807 L66.898,27.993 C65.409,28.179 63.92,28.365 61.872,28.738 C61.5,28.552 61.5,28.18 61.686,27.807 L62.431,27.621 C63.548,27.435 63.731,26.876 64.106,25.201 L66.898,13.287 C66.054,13.647 65.244,14.082 64.478,14.587 C64.106,14.587 63.92,14.215 64.106,13.842 C65.027,12.971 66.099,12.277 67.271,11.794 L67.829,9.932 C68.159,9.67 68.539,9.48 68.946,9.374 C69.877,9.374 70.435,9.374 70.621,9.746 L70.249,11.611 Z M68.387,19.611 C68.387,19.983 68.201,20.356 68.573,20.542 C68.778,20.738 69.038,20.868 69.318,20.914 C69.914,20.79 70.405,20.368 70.618,19.797 C71.583,18.3 72.1,16.558 72.11,14.777 C71.924,13.288 71.179,12.729 70.248,12.916 L69.876,12.916 L68.387,19.611 Z"/><path d="M87.188,13.287 C87.288,15.316 86.624,17.309 85.326,18.872 C84.285,20.101 82.823,20.898 81.226,21.106 C78.62,21.292 77.503,19.806 77.317,17.941 C77.194,15.764 77.929,13.625 79.365,11.984 C80.311,10.895 81.649,10.226 83.088,10.122 C85.885,9.75 87.002,11.425 87.188,13.287 Z M82.162,12.17 C81.417,13.47 80.114,16.452 80.3,18.87 C80.285,19.121 80.378,19.367 80.556,19.545 C80.734,19.723 80.98,19.816 81.231,19.801 C81.789,19.801 82.348,19.056 82.907,17.939 C83.771,16.073 84.215,14.04 84.209,11.984 C84.209,11.426 84.023,10.867 83.464,11.053 C82.867,11.177 82.375,11.599 82.162,12.17 Z"/><path d="M88.864,19.057 C88.854,18.554 88.917,18.053 89.05,17.568 L92.028,4.723 C92.214,3.792 92.214,3.606 91.656,3.234 L90.911,2.862 C90.823,2.796 90.772,2.693 90.772,2.583 C90.772,2.473 90.823,2.37 90.911,2.304 C92.357,1.734 93.853,1.298 95.379,1 C95.564,1 95.564,1 95.564,1.186 C95.316,2.319 95.006,3.438 94.633,4.537 L92.028,17.009 C91.842,17.754 91.842,18.126 92.214,18.126 C92.772,18.126 94.076,16.451 94.634,15.706 C94.935,15.724 95.174,15.963 95.192,16.264 C94.573,18.388 92.737,19.93 90.538,20.173 C89.236,20.174 88.864,19.615 88.864,19.057 Z"/><path d="M105.618,11.425 C105.719,13.454 105.055,15.447 103.757,17.01 C102.716,18.239 101.254,19.036 99.657,19.244 C97.051,19.43 95.934,17.944 95.748,16.079 C95.625,13.902 96.36,11.763 97.796,10.122 C98.742,9.033 100.08,8.364 101.519,8.26 C102.496,8.038 103.522,8.264 104.315,8.876 C105.108,9.488 105.586,10.423 105.618,11.425 Z M100.778,10.308 C100.033,11.608 98.73,14.589 98.916,17.008 C98.901,17.259 98.994,17.505 99.172,17.683 C99.35,17.861 99.596,17.954 99.847,17.939 C100.406,17.939 100.964,17.194 101.522,16.077 C102.385,14.21 102.829,12.177 102.822,10.12 C102.822,9.562 102.636,9.003 102.077,9.189 C101.49,9.333 101.007,9.749 100.778,10.308 Z"/></g></g>
+    </svg>
+  </div>
+  <nav>
+    <a href="#entregables">Entregables</a>
+    <a href="#gantt">Timeline</a>
+    <a href="#fases">Fases</a>
+    <a href="#equipo">Equipo</a>
+  </nav>
+</header>
+
+<!-- ═══════════════════════ TOP BAR ═══════════════════════ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="key">Timeline</span>
+    <span class="val">9 meses</span>
+    <span class="sep">·</span>
+    <span class="key">Inicio</span>
+    <span class="val">Septiembre 2026</span>
+    <span class="sep">·</span>
+    <span class="key">Fin</span>
+    <span class="val">Mayo 2027</span>
+    <span class="sep">·</span>
+    <span class="key">Cliente</span>
+    <span class="val">Ministerio de Energía — Argentina</span>
+    <span class="sep">·</span>
+    <span class="key">Objetivo</span>
+    <span class="val">Democratizar el acceso y fortalecer la gestión de los subsidios energéticos</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════ SCOPE NOTE ═══════════════════════ -->
+<div class="scope-note">
+  <span class="ast">*</span>
+  <span><strong>Supuestos y gobernanza:</strong> La decisión sobre qué datos se publican, con qué nivel de detalle y con qué frecuencia es del Ministerio en todo momento. La arquitectura soporta tanto escenarios de publicación completa como restringida sin rehacer el desarrollo. El criterio de apertura puede revisarse cuando el Ministerio lo considere.</span>
+</div>
+
+<!-- ═══════════════════════ MAIN ═══════════════════════ -->
+<main>
+
+  <!-- ───── CONTEXTO ───── -->
+  <div class="section">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Contexto y punto de partida</h2>
+    </div>
+    <div class="section-right">
+      <div class="content-box">
+        <h3>El activo</h3>
+        <p>El padrón ReSEF reúne <strong>cerca de 10 millones de registros</strong> de hogares evaluados para subsidios energéticos, con granularidad por localidad en todo el territorio nacional (23 provincias y CABA). Se trata de uno de los padrones de subsidios energéticos más granulares y completos de la región, lo que constituye un activo de información de alto valor para su explotación analítica y su apertura pública.</p>
+      </div>
+      <div class="content-box">
+        <h3>La lógica del plan</h3>
+        <p>Un mismo activo de datos, dos frentes de impacto. El Portal de Transparencia es el paraguas de la pista pública: concentra mapas, simulador y API, y convierte el padrón en información que cualquiera puede explorar y reutilizar. En paralelo, la pista interna lleva esos mismos datos al tablero de la Secretaría de Energía: monitoreo del padrón, alertas tempranas y generación ágil de comunicación oficial.</p>
+        <p>Lo que se construye para uno acelera al otro: <strong>una sola base, una sola arquitectura, doble retorno.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── ENTREGABLES ───── -->
+  <div class="section" id="entregables">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Los 5 entregables</h2>
+    </div>
+    <div class="section-right">
+
+      <!-- PISTA PÚBLICA -->
+      <div class="track-label pub-track">Pista pública — Portal + funcionalidades progresivas *</div>
+      <div class="entregable-grid">
+
+        <div class="entregable-card full">
+          <div class="e-num">Entregable 01 · Mes 3 — Nov 2026</div>
+          <div class="e-title">Portal de Transparencia + API Pública *</div>
+          <div class="e-meta">
+            <span class="tag pub">Público</span>
+            <span class="tag mid">Complejidad media</span>
+          </div>
+          <div class="e-desc">Portal público que permite explorar el padrón por provincia y localidad, con visualizaciones de la distribución de los subsidios y descarga de datos abiertos. Incluye una API REST documentada (OpenAPI) para que medios, universidades y terceros consuman la información e integren sus propios desarrollos.</div>
+        </div>
+
+        <div class="entregable-card">
+          <div class="e-num">Entregable 02 · Mes 4 — Dic 2026</div>
+          <div class="e-title">Simulador de Elegibilidad *</div>
+          <div class="e-meta">
+            <span class="tag pub">Público</span>
+            <span class="tag easy">Baja complejidad</span>
+          </div>
+          <div class="e-desc">Herramienta donde cualquier persona responde unas pocas preguntas y verifica si reúne las condiciones para acceder al subsidio. El cálculo se resuelve en el propio dispositivo del usuario, sin que sus respuestas se envíen ni se almacenen: <strong>privacidad por diseño</strong>.</div>
+        </div>
+
+        <div class="entregable-card">
+          <div class="e-num">Entregable 03 · Mes 9 — May 2027</div>
+          <div class="e-title">Mapa de Vulnerabilidad Energética *</div>
+          <div class="e-meta">
+            <span class="tag pub">Público</span>
+            <span class="tag hard">Alta complejidad</span>
+          </div>
+          <div class="e-desc">Mapa analítico que permite entender la vulnerabilidad energética de los hogares y su relación con los subsidios: dónde se concentran los hogares vulnerables, qué nivel de cobertura tienen y cómo se corresponde con la focalización actual. Provee evidencia georreferenciada para sustentar decisiones de focalización y la gestión de financiamiento del sector.</div>
+        </div>
+
+      </div>
+
+      <!-- PISTA INTERNA -->
+      <div class="track-label int-track" style="margin-top:8px;">Pista interna — en paralelo</div>
+      <div class="entregable-grid">
+
+        <div class="entregable-card">
+          <div class="e-num">Entregable 04 · Mes 5 — Ene 2027</div>
+          <div class="e-title">Dashboard Interno con Roles</div>
+          <div class="e-meta">
+            <span class="tag int">Interno</span>
+            <span class="tag mid">Complejidad media</span>
+            <span class="tag par">Paralelo</span>
+          </div>
+          <div class="e-desc">Tablero de gestión con acceso por perfiles para el Ministerio y los reguladores provinciales. Permite monitorear las variaciones del padrón mes a mes, detectar anomalías mediante alertas y seguir la evolución de la población beneficiaria para sustentar la coordinación con los organismos del sector.</div>
+        </div>
+
+        <div class="entregable-card">
+          <div class="e-num">Entregable 05 · Mes 7 — Mar 2027</div>
+          <div class="e-title">Generador de Comunicación</div>
+          <div class="e-meta">
+            <span class="tag int">Interno</span>
+            <span class="tag mid">Complejidad media</span>
+            <span class="tag par">Paralelo</span>
+          </div>
+          <div class="e-desc">Herramienta que permite al equipo de comunicación generar piezas listas para publicar (infografías, tablas y mapas) a partir de los datos del padrón, con identidad institucional y en minutos. Le da al Ministerio autonomía y rapidez para comunicar, sin depender de desarrollos externos para cada pedido.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── GANTT ───── -->
+  <div class="section" id="gantt">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Roadmap y Timeline</h2>
+    </div>
+    <div class="section-right">
+
+      <div class="gantt-wrap">
+        <div class="gantt-header">
+          <div class="gantt-header-label">Entregable</div>
+          <div class="gantt-header-month">Sep</div>
+          <div class="gantt-header-month">Oct</div>
+          <div class="gantt-header-month hl">Nov</div>
+          <div class="gantt-header-month hl">Dic</div>
+          <div class="gantt-header-month">Ene</div>
+          <div class="gantt-header-month">Feb</div>
+          <div class="gantt-header-month hl">Mar</div>
+          <div class="gantt-header-month">Abr</div>
+          <div class="gantt-header-month hl">May</div>
+        </div>
+
+        <!-- Fundación -->
+        <div class="gantt-row gantt-section-header">
+          <div class="gantt-label">PISTA PÚBLICA</div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+        <!-- Preparación -->
+        <div class="gantt-row">
+          <div class="gantt-label">Fundación<span>Data pipeline + arquitectura</span></div>
+          <div class="gantt-cell"><div class="gantt-bar full prep"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar full prep"></div></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+        <!-- Portal + API -->
+        <div class="gantt-row">
+          <div class="gantt-label">01 — Portal + API *<span>Lanzamiento Nov '26</span></div>
+          <div class="gantt-cell"><div class="gantt-bar start prep"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar mid"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar end launch"></div><div class="gantt-dot"></div></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+        <!-- Simulador -->
+        <div class="gantt-row">
+          <div class="gantt-label">02 — Simulador *<span>Lanzamiento Dic '26</span></div>
+          <div class="gantt-cell"></div>
+          <div class="gantt-cell"></div>
+          <div class="gantt-cell"><div class="gantt-bar start prep"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar end launch"></div><div class="gantt-dot"></div></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="gantt-row">
+          <div class="gantt-label">03 — Mapa Vulnerabilidad *<span>Lanzamiento May '27</span></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"><div class="gantt-bar start prep"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar mid prep"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar end launch"></div><div class="gantt-dot"></div></div>
+        </div>
+
+        <!-- Pista interna header -->
+        <div class="gantt-row gantt-section-header int-track">
+          <div class="gantt-label">PISTA INTERNA</div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="gantt-row int-row">
+          <div class="gantt-label">04 — Dashboard Interno<span>Lanzamiento Ene '27</span></div>
+          <div class="gantt-cell"></div>
+          <div class="gantt-cell"><div class="gantt-bar start int"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar mid int"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar mid int-active"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar end int-active"></div><div class="gantt-dot int"></div></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+        <!-- Generador -->
+        <div class="gantt-row int-row">
+          <div class="gantt-label">05 — Generador Comunicación<span>Lanzamiento Mar '27</span></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div><div class="gantt-cell"></div>
+          <div class="gantt-cell"></div>
+          <div class="gantt-cell"><div class="gantt-bar start int"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar mid int-active"></div></div>
+          <div class="gantt-cell"><div class="gantt-bar end int-active"></div><div class="gantt-dot int"></div></div>
+          <div class="gantt-cell"></div><div class="gantt-cell"></div>
+        </div>
+
+      </div>
+
+      <div style="display:flex;gap:20px;font-size:12px;color:var(--gray);padding:0 4px;flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:24px;height:8px;background:var(--accent-light);border-radius:2px;"></span>
+          Preparación
+        </span>
+        <span style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:24px;height:8px;background:var(--accent);border-radius:2px;"></span>
+          Desarrollo activo (público)
+        </span>
+        <span style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:24px;height:8px;background:#3182ce;border-radius:2px;opacity:.8;"></span>
+          Desarrollo activo (interno)
+        </span>
+        <span style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid white;box-shadow:0 0 0 2px var(--accent);"></span>
+          Lanzamiento público
+        </span>
+        <span style="display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#3182ce;border:2px solid white;box-shadow:0 0 0 2px #3182ce;"></span>
+          Lanzamiento interno
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───── DETALLE FASES ───── -->
+  <div class="section" id="fases">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Detalle de fases</h2>
+    </div>
+    <div class="section-right">
+
+      <!-- M1 -->
+      <div class="fase-card">
+        <div class="fase-header">
+          <div class="fase-num">M1</div>
+          <div class="fase-info">
+            <div class="fase-title">Septiembre 2026 — Fundación</div>
+            <div class="fase-periodo">Mes 1 · Preparación técnica y de gobernanza</div>
+          </div>
+        </div>
+        <div class="fase-body">
+          <p>El primer mes no entrega producto visible. Es la base que hace que todo lo siguiente sea sólido y escalable.</p>
+          <ul>
+            <li>Procesamiento y validación del padrón ReSEF (parquet a dataset agregado por localidad)</li>
+            <li>Definición de arquitectura técnica: portal, API, base de datos y capas de acceso</li>
+            <li>Criterio de agregación mínima (100 hogares por celda) para proteger las localidades pequeñas</li>
+            <li>Acuerdo de gobernanza con el Ministerio: qué se publica, con qué nivel de detalle y con qué frecuencia de actualización</li>
+            <li>Kick-off con el equipo de comunicación y los referentes provinciales clave</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M2-3 -->
+      <div class="fase-card">
+        <div class="fase-header">
+          <div class="fase-num">M2</div>
+          <div class="fase-info">
+            <div class="fase-title">Octubre–Noviembre 2026 — Portal + API</div>
+            <div class="fase-periodo">Meses 2–3 · El hito comunicacional</div>
+          </div>
+        </div>
+        <div class="fase-body">
+          <p>El producto de mayor visibilidad: el padrón de subsidios energéticos disponible de forma abierta y georreferenciada. La API es la capa técnica que alimenta el portal y habilita integraciones de terceros.</p>
+          <ul>
+            <li>Visualización del padrón por localidad (% de hogares subsidiados, navegable y filtrable)</li>
+            <li>Gráficos de distribución por tramo de ingreso en CBT, por provincia y por categoría especial</li>
+            <li>Sección de poblaciones vulnerables por región</li>
+            <li>Comparador interprovincial con un click</li>
+            <li>Descarga de datos abiertos y texto explicativo junto a cada visualización</li>
+            <li>API REST documentada (OpenAPI): endpoints por provincia, localidad y tramo</li>
+            <li>En paralelo (octubre): inicio del Dashboard interno (preparación y diseño de roles)</li>
+          </ul>
+          <span class="fase-deliverable">🚀 Lanzamiento Nov 2026: Portal de Transparencia + API *</span>
+        </div>
+      </div>
+
+      <!-- M3-4 -->
+      <div class="fase-card">
+        <div class="fase-header">
+          <div class="fase-num">M4</div>
+          <div class="fase-info">
+            <div class="fase-title">Noviembre–Diciembre 2026 — Simulador + Dashboard (pista interna)</div>
+            <div class="fase-periodo">Mes 4 · Primera funcionalidad sobre el portal · Dashboard en desarrollo</div>
+          </div>
+        </div>
+        <div class="fase-body">
+          <p>El simulador se suma al portal como primera funcionalidad de interacción ciudadana directa. En paralelo, el dashboard interno entra en desarrollo intensivo.</p>
+          <ul>
+            <li>Flujo de preguntas simple para verificar elegibilidad</li>
+            <li>Resultado personalizado con enlace al registro ReSEF si corresponde</li>
+            <li>Cálculo en el dispositivo del usuario, sin backend ni almacenamiento de datos personales: <strong>privacidad por diseño</strong></li>
+            <li>Dashboard interno: definición de roles (Ministerio / regulador provincial / auditoría / comunicación), UI y autenticación</li>
+          </ul>
+          <span class="fase-deliverable">🚀 Lanzamiento Dic 2026: Simulador de Elegibilidad *</span>
+        </div>
+      </div>
+
+      <!-- M5 -->
+      <div class="fase-card int-fase">
+        <div class="fase-header">
+          <div class="fase-num">M5</div>
+          <div class="fase-info">
+            <div class="fase-title">Enero 2027 — Dashboard Interno</div>
+            <div class="fase-periodo">Mes 5 · Pista interna · Gestión operacional</div>
+          </div>
+        </div>
+        <div class="fase-body">
+          <p>Tablero de gestión con acceso diferenciado por rol. Ministerio, reguladores provinciales y auditoría tienen visibilidad sobre el padrón en tiempo real.</p>
+          <ul>
+            <li>Monitor: variación de beneficiarios mes a mes por localidad</li>
+            <li>Alertas: localidades con variaciones inusuales en el padrón</li>
+            <li>Proyección: ante un cambio en la CBT, cuántos hogares entran o salen del padrón</li>
+            <li>Autenticación con identidad del Estado (Mi Argentina)</li>
+            <li>En paralelo: inicio del Generador de comunicación (diseño de templates y UX)</li>
+          </ul>
+          <span class="fase-deliverable int">🚀 Lanzamiento Ene 2027: Dashboard Interno</span>
+        </div>
+      </div>
+
+      <!-- M7 -->
+      <div class="fase-card int-fase">
+        <div class="fase-header">
+          <div class="fase-num">M7</div>
+          <div class="fase-info">
+            <div class="fase-title">Febrero–Marzo 2027 — Generador de Comunicación</div>
+            <div class="fase-periodo">Mes 6–7 · Pista interna · Comunicación autogestionada</div>
+          </div>
+        </div>
+        <div class="fase-body">
+          <p>El equipo de comunicación genera piezas listas para publicar sin depender de proveedores externos para cada nota, campaña o presentación.</p>
+          <ul>
+            <li>Infografías: métrica + provincia a PNG/SVG listo para redes en segundos</li>
+            <li>Tablas de prensa: ranking de provincias a PDF/Excel con identidad institucional</li>
+            <li>Mapas en alta resolución para conferencias y presentaciones oficiales</li>
+            <li>Texto automático: párrafo con los datos clave para comunicados de prensa</li>
+          </ul>
+          <span class="fase-deliverable int">🚀 Lanzamiento Mar 2027: Generador de Comunicación</span>
+        </div>
+      </div>
+
+      <!-- M8-9 -->
+      <div class="fase-card">
+        <div class="fase-header">
+          <div class="fase-num">M9</div>
+          <div class="fase-info">
+            <div class="fase-title">Abril–Mayo 2027 — Mapa de Vulnerabilidad + Cierre</div>
+            <div class="fase-periodo">Meses 8–9 · Funcionalidad estratégica sobre el portal</div>
+          </div>
+        </div>
+        <div class="fase-body">
+          <p>La funcionalidad de mayor valor estratégico. Se agrega al portal como una capa analítica avanzada que profundiza la lectura del padrón.</p>
+          <ul>
+            <li>Análisis de la vulnerabilidad energética de los hogares a partir del padrón</li>
+            <li>Dónde se concentran los hogares vulnerables y qué nivel de cobertura tienen</li>
+            <li>Cómo se corresponde la asignación actual con la focalización de los subsidios por localidad</li>
+            <li>Evidencia georreferenciada para sustentar decisiones de focalización y la gestión de financiamiento del sector</li>
+            <li>Retrospectiva del programa + hoja de ruta para la etapa siguiente</li>
+          </ul>
+          <span class="fase-deliverable">🚀 Lanzamiento May 2027: Mapa de Vulnerabilidad + Cierre</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───── EQUIPO ───── -->
+  <div class="section" id="equipo">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Equipo y roles</h2>
+    </div>
+    <div class="section-right">
+
+      <div class="boxed-list">
+        <h3>Roles sugeridos</h3>
+        <div style="overflow-x:auto;">
+          <table class="roles-table">
+            <thead>
+              <tr>
+                <th>Rol</th>
+                <th>Dedicación</th>
+                <th>Meses activos</th>
+                <th>Foco</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tech Lead / Arquitecto</td>
+                <td>Full-time</td>
+                <td>1–9</td>
+                <td>Pipeline de datos, API, infraestructura general</td>
+              </tr>
+              <tr>
+                <td>Frontend Developer</td>
+                <td>Full-time</td>
+                <td>2–7</td>
+                <td>Portal, simulador, generador</td>
+              </tr>
+              <tr>
+                <td>Data Engineer</td>
+                <td>Part-time</td>
+                <td>1–3, 7–9</td>
+                <td>ETL, cruce de datos</td>
+              </tr>
+              <tr>
+                <td>Diseñador UX/UI</td>
+                <td>Part-time</td>
+                <td>2–6</td>
+                <td>Interfaces</td>
+              </tr>
+              <tr>
+                <td>Product Manager</td>
+                <td>Part-time</td>
+                <td>1–9</td>
+                <td>Coordinación Ministerio, priorización, roadmap</td>
+              </tr>
+              <tr>
+                <td>Referente del Ministerio</td>
+                <td>Referente interno</td>
+                <td>1–9</td>
+                <td>Validación de contenidos, acceso a datos, aprobación de publicaciones</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="content-box">
+        <h3>Stack técnico</h3>
+        <ul>
+          <li><strong>Portal / Frontend:</strong> React + Vite · Mapas con Mapbox GL o Deck.gl · Gráficos con Observable Plot</li>
+          <li><strong>API:</strong> Node.js o FastAPI (Python) · Deploy en Vercel o Railway · Docs OpenAPI/Swagger</li>
+          <li><strong>Datos:</strong> DuckDB para queries sobre el parquet · PostgreSQL para datos operacionales</li>
+          <li><strong>Auth (dashboard):</strong> OIDC con proveedor del Estado (Mi Argentina) o Auth0</li>
+          <li><strong>Mapas base:</strong> IGN Argentina (datos geográficos oficiales, libres de uso)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+</main>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="logo">
+    <svg viewBox="0 0 105 28" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" fill-rule="evenodd"><g transform="translate(-1,-1)"><path d="M6.957,19.057 L6.212,22.04 C7.329,19.992 9.19,17.2 11.238,17.014 C11.618,16.935 12.013,17.038 12.306,17.294 C12.598,17.549 12.754,17.927 12.727,18.314 C12.556,19.386 12.307,20.443 11.982,21.479 C13.471,18.687 15.333,16.639 17.008,16.453 C17.869,16.35 18.67,16.91 18.87,17.753 C18.901,18.515 18.775,19.276 18.498,19.987 C18.091,21.565 17.594,23.119 17.009,24.64 C16.823,25.012 17.009,25.198 17.195,25.198 C17.567,25.198 18.684,24.081 19.243,23.336 C19.429,23.336 19.801,23.522 19.801,23.708 C18.875,25.728 16.978,27.133 14.775,27.431 C14.212,27.475 13.716,27.062 13.658,26.5 C13.629,26.058 13.692,25.616 13.844,25.2 C14.402,23.338 14.961,21.663 15.519,19.8 C15.645,19.441 15.708,19.063 15.705,18.683 C15.691,18.483 15.533,18.325 15.333,18.311 C15.147,18.311 14.402,18.87 13.658,20.173 C12.358,22.034 11.424,25.013 10.493,27.433 C10.307,27.991 10.121,27.991 9.562,27.991 C8.445,28.177 7.7,27.991 7.7,27.433 C7.7,27.061 8.817,23.152 9.562,20.359 C9.688,20 9.751,19.622 9.748,19.242 C9.734,19.042 9.576,18.884 9.376,18.87 C9.004,18.87 8.259,19.428 7.514,20.732 C6.266,23.039 5.268,25.473 4.536,27.992 C4.397,28.375 4.008,28.608 3.605,28.55 C2.488,28.736 1.744,28.55 1.744,27.992 C1.744,27.62 3.233,21.849 3.605,20.732 C3.791,19.801 3.791,19.615 3.419,19.801 C2.488,19.801 1.93,20.918 1.557,21.476 C1.371,21.476 0.999,21.29 0.999,21.104 C1.708,19.211 3.452,17.903 5.467,17.753 C7.143,17.568 7.143,18.313 6.957,19.057 Z"/></g></g>
+    </svg>
+  </div>
+  <span>Plan de Trabajo · Ministerio de Energía · Argentina · Septiembre 2026 – Mayo 2027</span>
+  <span>Confidencial — uso interno</span>
+</footer>
+
+</body>
+</html>
