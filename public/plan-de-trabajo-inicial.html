@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etapa 1 — Punto de Partida · Ministerio de Energía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:        #e66065;
+      --accent-light:  #f5b5b8;
+      --accent-bg:     rgba(245, 181, 184, 0.18);
+      --black:         #000;
+      --white:         #fff;
+      --gray:          #999;
+      --border:        #d1d5db;
+      --bg:            #f8f8f8;
+      --blue:          #2b6cb0;
+      --blue-light:    #90cdf4;
+      --blue-bg:       rgba(235, 248, 255, 0.5);
+      --font-display:  'Bebas Neue', system-ui, sans-serif;
+      --font-body:     'Inter', system-ui, sans-serif;
+      --px:            10.5vw;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0; z-index: 30;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--px);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo svg { height: 22px; width: auto; color: var(--accent); fill: currentColor; }
+    nav { display: flex; gap: 24px; }
+    nav a {
+      font-family: var(--font-display); font-size: 13px;
+      letter-spacing: .06em; text-decoration: none;
+      color: var(--gray); transition: color .15s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── Top bar ── */
+    .topbar { border-bottom: 1px solid var(--border); padding: 20px var(--px); }
+    .topbar-inner {
+      display: flex; flex-wrap: wrap; gap: 8px 24px;
+      font-family: var(--font-display); font-size: 15px;
+      letter-spacing: .05em; text-transform: uppercase;
+    }
+    .topbar-inner .key { color: var(--black); }
+    .topbar-inner .val { color: var(--accent); }
+    .topbar-inner .sep { color: var(--border); }
+
+    /* ── Recomendación banner ── */
+    .rec-banner {
+      background: #f0fdf4;
+      border-bottom: 1px solid #86efac;
+      padding: 12px var(--px);
+      display: flex; align-items: center; gap: 12px;
+      font-size: 13px; color: #166534;
+    }
+    .rec-banner .rec-pill {
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: .08em; text-transform: uppercase;
+      background: #166534; color: #fff;
+      padding: 3px 10px; border-radius: 100px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .rec-banner strong { font-weight: 600; color: #14532d; }
+
+    /* ── Main ── */
+    main { padding: 64px var(--px) 100px; }
+
+    /* ── Two-column section ── */
+    .section {
+      display: grid; grid-template-columns: repeat(12, 1fr);
+      gap: 40px 56px; margin-bottom: 88px;
+    }
+    .section-left {
+      grid-column: 1 / 5; position: sticky;
+      top: 104px; align-self: start;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .section-bar { width: 3px; min-height: 40px; background: var(--accent-light); border-radius: 2px; flex-shrink: 0; }
+    .section-bar.blue { background: var(--blue-light); }
+    .section-title {
+      font-family: var(--font-display); font-size: 34px;
+      letter-spacing: .03em; text-transform: uppercase;
+      color: var(--accent); line-height: 1.1;
+    }
+    .section-title.blue { color: var(--blue); }
+    .section-right { grid-column: 5 / 13; }
+
+    /* ── Content box ── */
+    .content-box {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 28px 32px; background: var(--accent-bg); margin-bottom: 28px;
+    }
+    .content-box.blue { background: var(--blue-bg); }
+    .content-box.neutral { background: var(--bg); }
+    .content-box h3 {
+      font-family: var(--font-display); font-size: 22px;
+      letter-spacing: .04em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .content-box.blue h3 { color: var(--blue); }
+    .content-box.neutral h3 { color: #333; }
+    .content-box p, .content-box li { color: var(--black); font-size: 14.5px; }
+    .content-box ul { padding-left: 18px; }
+    .content-box li { margin-bottom: 6px; }
+    .content-box strong { font-weight: 600; }
+
+    /* ── Highlight box ── */
+    .highlight-row {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 14px; margin-bottom: 28px;
+    }
+    .highlight-box {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 20px 22px; background: var(--white);
+      border-top: 3px solid var(--accent);
+    }
+    .highlight-box.blue { border-top-color: var(--blue); }
+    .highlight-box .hv {
+      font-family: var(--font-display); font-size: 28px;
+      line-height: 1; color: var(--accent); margin-bottom: 4px;
+    }
+    .highlight-box.blue .hv { color: var(--blue); }
+    .highlight-box .hl { font-size: 12px; color: var(--gray); font-weight: 500; }
+
+    /* ── Variable cards ── */
+    .var-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-bottom: 28px;
+    }
+    .var-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 18px 22px; background: var(--white);
+    }
+    .var-card .vc-label {
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 10px;
+    }
+    .var-card ul { list-style: none; }
+    .var-card li {
+      font-size: 13px; color: #333;
+      padding: 5px 0; border-bottom: 1px solid var(--border);
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .var-card li:last-child { border-bottom: none; }
+    .var-card li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+    .var-card.blue li::before { color: var(--blue); }
+
+    /* ── Roles table ── */
+    .roles-wrap {
+      border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; margin-bottom: 28px;
+    }
+    .roles-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .roles-table th {
+      text-align: left; padding: 10px 16px;
+      font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--gray); border-bottom: 1px solid var(--border);
+      background: var(--bg); font-weight: 600;
+    }
+    .roles-table th:first-child { width: 180px; }
+    .roles-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: #333; vertical-align: top; }
+    .roles-table tr:last-child td { border-bottom: none; }
+    .roles-table td:first-child { font-weight: 700; color: var(--black); }
+    .roles-table .role-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600;
+      padding: 2px 10px; border-radius: 100px; border: 1px solid;
+    }
+    .role-pill.secretaria { background: #fff0f0; color: var(--accent); border-color: var(--accent-light); }
+    .role-pill.comunicacion { background: #ebf8ff; color: var(--blue); border-color: var(--blue-light); }
+    .check { color: #16a34a; font-weight: 700; }
+    .dash { color: #d1d5db; }
+
+    /* ── Simple timeline ── */
+    .timeline {
+      border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden; margin-bottom: 28px;
+    }
+    .tl-header {
+      display: grid; grid-template-columns: 160px 1fr 1fr;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+    }
+    .tl-header div {
+      padding: 10px 16px; font-family: var(--font-display);
+      font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gray); border-right: 1px solid var(--border);
+    }
+    .tl-header div:last-child { border-right: none; }
+    .tl-header div.hl { color: var(--accent); }
+    .tl-row {
+      display: grid; grid-template-columns: 160px 1fr 1fr;
+      border-bottom: 1px solid var(--border); min-height: 60px;
+      align-items: center;
+    }
+    .tl-row:last-child { border-bottom: none; }
+    .tl-label {
+      padding: 12px 16px; font-size: 12.5px; font-weight: 700;
+      color: var(--black); border-right: 1px solid var(--border); line-height: 1.3;
+    }
+    .tl-label span { display: block; font-size: 11px; font-weight: 400; color: var(--gray); margin-top: 2px; }
+    .tl-cell { padding: 12px 16px; border-right: 1px solid var(--border); }
+    .tl-cell:last-child { border-right: none; }
+    .tl-cell ul { list-style: none; }
+    .tl-cell li { font-size: 12.5px; color: #444; padding: 2px 0; display: flex; gap: 6px; }
+    .tl-cell li::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+    .tl-cell li.blue::before { color: var(--blue); }
+    .tl-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: var(--white);
+      font-size: 10.5px; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px; margin-top: 8px;
+    }
+    .tl-badge.blue { background: var(--blue); }
+
+    /* ── Stack chips ── */
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      font-family: var(--font-display); font-size: 12px;
+      letter-spacing: .05em; text-transform: uppercase;
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 4px 12px; border-radius: 100px; color: #444;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px var(--px);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11.5px; color: var(--gray);
+    }
+    footer .logo svg { height: 16px; color: var(--accent); fill: currentColor; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      :root { --px: 6vw; }
+      .section { grid-template-columns: 1fr; gap: 24px; }
+      .section-left { grid-column: 1; position: static; }
+      .section-right { grid-column: 1; }
+      .highlight-row { grid-template-columns: 1fr 1fr; }
+      .var-grid { grid-template-columns: 1fr; }
+      .tl-header, .tl-row { grid-template-columns: 120px 1fr; }
+      .tl-cell:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 105 28" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" fill-rule="evenodd"><g transform="translate(-1,-1)"><path d="M6.957,19.057 L6.212,22.04 C7.329,19.992 9.19,17.2 11.238,17.014 C11.618,16.935 12.013,17.038 12.306,17.294 C12.598,17.549 12.754,17.927 12.727,18.314 C12.556,19.386 12.307,20.443 11.982,21.479 C13.471,18.687 15.333,16.639 17.008,16.453 C17.869,16.35 18.67,16.91 18.87,17.753 C18.901,18.515 18.775,19.276 18.498,19.987 C18.091,21.565 17.594,23.119 17.009,24.64 C16.823,25.012 17.009,25.198 17.195,25.198 C17.567,25.198 18.684,24.081 19.243,23.336 C19.429,23.336 19.801,23.522 19.801,23.708 C18.875,25.728 16.978,27.133 14.775,27.431 C14.212,27.475 13.716,27.062 13.658,26.5 C13.629,26.058 13.692,25.616 13.844,25.2 C14.402,23.338 14.961,21.663 15.519,19.8 C15.645,19.441 15.708,19.063 15.705,18.683 C15.691,18.483 15.533,18.325 15.333,18.311 C15.147,18.311 14.402,18.87 13.658,20.173 C12.358,22.034 11.424,25.013 10.493,27.433 C10.307,27.991 10.121,27.991 9.562,27.991 C8.445,28.177 7.7,27.991 7.7,27.433 C7.7,27.061 8.817,23.152 9.562,20.359 C9.688,20 9.751,19.622 9.748,19.242 C9.734,19.042 9.576,18.884 9.376,18.87 C9.004,18.87 8.259,19.428 7.514,20.732 C6.266,23.039 5.268,25.473 4.536,27.992 C4.397,28.375 4.008,28.608 3.605,28.55 C2.488,28.736 1.744,28.55 1.744,27.992 C1.744,27.62 3.233,21.849 3.605,20.732 C3.791,19.801 3.791,19.615 3.419,19.801 C2.488,19.801 1.93,20.918 1.557,21.476 C1.371,21.476 0.999,21.29 0.999,21.104 C1.708,19.211 3.452,17.903 5.467,17.753 C7.143,17.568 7.143,18.313 6.957,19.057 Z"/></g></g>
+    </svg>
+  </div>
+  <nav>
+    <a href="#porquí">Por qué</a>
+    <a href="#herramienta">La herramienta</a>
+    <a href="#roles">Roles</a>
+    <a href="#timeline">Timeline</a>
+  </nav>
+</header>
+
+<!-- ═══ TOP BAR ═══ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="key">Etapa</span>
+    <span class="val">1 de 3</span>
+    <span class="sep">·</span>
+    <span class="key">Duración</span>
+    <span class="val">2 meses</span>
+    <span class="sep">·</span>
+    <span class="key">Inicio estimado</span>
+    <span class="val">Septiembre 2026</span>
+    <span class="sep">·</span>
+    <span class="key">Usuarios</span>
+    <span class="val">Equipo Antonio · Equipo Mariano</span>
+    <span class="sep">·</span>
+    <span class="key">Alcance</span>
+    <span class="val">Herramienta interna · Zona fría</span>
+  </div>
+</div>
+
+<!-- ═══ REC BANNER ═══ -->
+<div class="rec-banner">
+  <span class="rec-pill">Recomendación de inicio</span>
+  <span>Este documento describe <strong>por dónde empezar</strong> antes del plan completo. La lógica: algo chico, algo que no tienen, que construya nuestro propio stack y capacite al equipo de la Secretaría desde el día uno.</span>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+  <!-- ─── POR QUÉ EMPEZAR ACÁ ─── -->
+  <div class="section" id="porquí">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Por qué empezar acá</h2>
+    </div>
+    <div class="section-right">
+
+      <div class="highlight-row">
+        <div class="highlight-box">
+          <div class="hv">2</div>
+          <div class="hl">Meses para el primer entregable</div>
+        </div>
+        <div class="highlight-box">
+          <div class="hv">2</div>
+          <div class="hl">Equipos usuarios desde el día uno</div>
+        </div>
+        <div class="highlight-box blue">
+          <div class="hv blue">0</div>
+          <div class="hl">Herramientas internas de simulación hoy</div>
+        </div>
+      </div>
+
+      <div class="content-box">
+        <h3>La lógica del primer paso</h3>
+        <p>El plan completo tiene seis entregables a lo largo de nueve meses. Pero antes de arrancar con el portal público, la API o el mapa — todos complementos a trabajo existente — tiene sentido empezar con algo que <strong>no tienen</strong>, que podamos construir nosotros de cero y que genere valor inmediato para el equipo interno.</p>
+        <p style="margin-top:10px;">Un simulador de subsidios con variables editables cumple eso: es una herramienta que hoy no existe, tiene usuarios concretos (Antonio y Mariano), un caso de uso acotado y claro (zona fría), y sirve de base técnica — stack, arquitectura, auth — para todo lo que viene después.</p>
+      </div>
+
+      <div class="content-box neutral">
+        <h3>Cuatro razones para este orden</h3>
+        <ul>
+          <li><strong>Algo que no tienen:</strong> las herramientas actuales no permiten simular el impacto de cambiar los parámetros de focalización. Este simulador cubre ese vacío.</li>
+          <li style="margin-top:8px;"><strong>Alcance acotado:</strong> foco en zona fría reduce complejidad técnica y de datos al mínimo necesario para lanzar rápido.</li>
+          <li style="margin-top:8px;"><strong>Nuestro stack desde cero:</strong> React + Supabase + mapas, con arquitectura que escala hacia el portal público sin reescribir nada.</li>
+          <li style="margin-top:8px;"><strong>Capacitación real:</strong> el equipo de la Secretaría aprende el sistema mientras se construye, no después de que está terminado.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── LA HERRAMIENTA ─── -->
+  <div class="section" id="herramienta">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">La herramienta</h2>
+    </div>
+    <div class="section-right">
+
+      <div class="content-box">
+        <h3>Simulador de Subsidios con Variables Editables</h3>
+        <p>Una interfaz interna donde el equipo puede cambiar los parámetros del esquema de subsidios y ver al instante cuánta gente entra, cuánta sale y cuánto cuesta. Foco inicial en <strong>zona fría</strong> (Patagonia + NEA + NOA), con mapa de distribución de resultados integrado en la misma pantalla.</p>
+      </div>
+
+      <div class="var-grid">
+        <div class="var-card">
+          <div class="vc-label">Variables editables</div>
+          <ul>
+            <li>Umbral de ingreso (múltiplos de CBT)</li>
+            <li>Zona tarifaria (fría / templada / cálida)</li>
+            <li>Categoría residencial (R1 / R2 / R3)</li>
+            <li>Porcentaje de subsidio aplicado</li>
+            <li>Fecha de corte del padrón</li>
+          </ul>
+        </div>
+        <div class="var-card blue">
+          <div class="vc-label">Resultados generados</div>
+          <ul>
+            <li>Beneficiarios actuales vs. proyectados</li>
+            <li>Hogares que entran al cambiar el umbral</li>
+            <li>Hogares que pierden cobertura</li>
+            <li>Impacto fiscal estimado (costo anual)</li>
+            <li>Distribución por provincia en el mapa</li>
+          </ul>
+        </div>
+        <div class="var-card">
+          <div class="vc-label">Visualización del mapa</div>
+          <ul>
+            <li>Mapa coroplético por localidad</li>
+            <li>Color según concentración de beneficiarios</li>
+            <li>Click en provincia para detalle</li>
+            <li>Capa diferencial: quiénes entran / salen</li>
+            <li>Exportación del mapa como imagen</li>
+          </ul>
+        </div>
+        <div class="var-card blue">
+          <div class="vc-label">Exportación y comunicación</div>
+          <ul>
+            <li>Tabla de resultados a CSV / Excel</li>
+            <li>Infografía de impacto lista para redes</li>
+            <li>Párrafo de prensa autogenerado</li>
+            <li>Historial de simulaciones guardadas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-box blue">
+        <h3>Por qué zona fría primero</h3>
+        <p>La zona fría (Patagonia, NOA, NEA) concentra el impacto más visible del esquema de subsidios energéticos: las diferencias tarifarias son mayores, las condiciones climáticas son un factor determinante y hay organismos provinciales con necesidad directa de este tipo de análisis. Arrancar con un caso de uso concreto y acotado — en lugar de "todo el país" — permite entregar en semanas, no en meses, y iterar con usuarios reales.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── DIVISIÓN DE ROLES ─── -->
+  <div class="section" id="roles">
+    <div class="section-left">
+      <div class="section-bar blue"></div>
+      <h2 class="section-title blue">División de roles</h2>
+    </div>
+    <div class="section-right">
+
+      <div class="content-box neutral" style="margin-bottom:14px;">
+        <h3>Dos equipos, dos perfiles de uso</h3>
+        <p>Desde el día uno la herramienta tiene dos tipos de usuario con necesidades distintas. El equipo de Antonio necesita poder editar variables y explorar escenarios. El equipo de Mariano necesita tomar los resultados y convertirlos en comunicación lista para publicar. La división de roles resuelve esto sin que un equipo estorbe al otro.</p>
+      </div>
+
+      <div class="roles-wrap">
+        <table class="roles-table">
+          <thead>
+            <tr>
+              <th>Funcionalidad</th>
+              <th><span class="role-pill secretaria">Secretaría (Antonio)</span></th>
+              <th><span class="role-pill comunicacion">Comunicación (Mariano)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Editar variables de simulación</td>
+              <td><span class="check">✓ Acceso completo</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Ver resultados y comparativos</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Mapa interactivo de distribución</td>
+              <td><span class="check">✓ Con capas avanzadas</span></td>
+              <td><span class="check">✓ Vista simplificada</span></td>
+            </tr>
+            <tr>
+              <td>Guardar y comparar simulaciones</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Exportar infografías y mapas</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓ Con identidad institucional</span></td>
+            </tr>
+            <tr>
+              <td>Generar párrafo de prensa</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="check">✓</span></td>
+            </tr>
+            <tr>
+              <td>Exportar datos crudos (CSV)</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="dash">—</span></td>
+            </tr>
+            <tr>
+              <td>Acceso al historial completo</td>
+              <td><span class="check">✓</span></td>
+              <td><span class="check">✓ Solo lectura</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="content-box blue">
+        <h3>Auth desde el primer deploy</h3>
+        <p>La autenticación y los roles se implementan desde el inicio, no como una capa que se agrega después. Esto permite que el simulador sea accesible desde cualquier dispositivo del equipo sin riesgo de exposición de datos, y sienta la base del sistema de permisos que usará el dashboard completo en etapas posteriores.</p>
+        <div class="chip-row">
+          <span class="chip">Supabase Auth</span>
+          <span class="chip">Row Level Security</span>
+          <span class="chip">Rol Secretaría</span>
+          <span class="chip">Rol Comunicación</span>
+          <span class="chip">Login institucional</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── STACK Y TIMELINE ─── -->
+  <div class="section" id="timeline">
+    <div class="section-left">
+      <div class="section-bar"></div>
+      <h2 class="section-title">Stack y timeline</h2>
+    </div>
+    <div class="section-right">
+
+      <div class="content-box neutral" style="margin-bottom: 14px;">
+        <h3>Stack propio que escala</h3>
+        <p>La arquitectura de esta etapa no es un prototipo: es la base técnica que va a soportar el portal público, la API y el dashboard completo. Construir bien desde acá evita reescribir después.</p>
+        <div class="chip-row">
+          <span class="chip">React + Vite</span>
+          <span class="chip">Supabase</span>
+          <span class="chip">Mapbox GL</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">Vercel</span>
+          <span class="chip">ReSEF parquet</span>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-header">
+          <div>Actividad</div>
+          <div class="hl">Mes 1 — Septiembre 2026</div>
+          <div class="hl">Mes 2 — Octubre 2026</div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-label">Datos<span>Pipeline ReSEF</span></div>
+          <div class="tl-cell">
+            <ul>
+              <li>Procesamiento padrón zona fría</li>
+              <li>Agregación por localidad</li>
+              <li>Carga inicial a Supabase</li>
+            </ul>
+          </div>
+          <div class="tl-cell">
+            <ul>
+              <li>Validación y ajuste de datos</li>
+              <li>Pipeline de actualización mensual</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-label">Simulador<span>Variables + resultados</span></div>
+          <div class="tl-cell">
+            <ul>
+              <li>Arquitectura y diseño de UI</li>
+              <li>Motor de cálculo (variables → resultados)</li>
+              <li>Primeras variables editables</li>
+            </ul>
+          </div>
+          <div class="tl-cell">
+            <ul>
+              <li>Historial y comparador de escenarios</li>
+              <li>Exportación CSV / infografía</li>
+              <li class="blue">🚀 Lanzamiento simulador</li>
+            </ul>
+            <span class="tl-badge">Entregable Oct 2026</span>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-label">Mapa<span>Visualización geo</span></div>
+          <div class="tl-cell">
+            <ul>
+              <li>Setup Mapbox + capas base</li>
+              <li>Coroplético por localidad</li>
+            </ul>
+          </div>
+          <div class="tl-cell">
+            <ul>
+              <li>Capa diferencial (entran / salen)</li>
+              <li>Exportación de mapa como imagen</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-label">Auth / Roles<span>Accesos</span></div>
+          <div class="tl-cell">
+            <ul>
+              <li>Supabase Auth + RLS</li>
+              <li>Roles: Secretaría / Comunicación</li>
+            </ul>
+          </div>
+          <div class="tl-cell">
+            <ul>
+              <li>Vista diferenciada por rol</li>
+              <li>Alta de usuarios del equipo</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-row">
+          <div class="tl-label">Capacitación<span>Equipo Secretaría</span></div>
+          <div class="tl-cell">
+            <ul>
+              <li>Kick-off técnico con el equipo</li>
+              <li>Sesiones de pair programming</li>
+            </ul>
+          </div>
+          <div class="tl-cell">
+            <ul>
+              <li>Documentación de la arquitectura</li>
+              <li>Transferencia de conocimiento</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="content-box">
+        <h3>Relación con el plan completo</h3>
+        <p>Esta etapa entrega el <strong>Entregable 02 (Simulador)</strong> y la base de roles que luego usa el <strong>Entregable 05 (Dashboard Interno)</strong>. El stack de mapas queda listo para el <strong>Entregable 04 (Mapa de Vulnerabilidad)</strong>. Nada de lo que se construye acá se descarta: es la primera capa de la arquitectura final.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="logo">
+    <svg viewBox="0 0 105 28" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" fill-rule="evenodd"><g transform="translate(-1,-1)"><path d="M6.957,19.057 L6.212,22.04 C7.329,19.992 9.19,17.2 11.238,17.014 C11.618,16.935 12.013,17.038 12.306,17.294 C12.598,17.549 12.754,17.927 12.727,18.314 C12.556,19.386 12.307,20.443 11.982,21.479 C13.471,18.687 15.333,16.639 17.008,16.453 C17.869,16.35 18.67,16.91 18.87,17.753 C18.901,18.515 18.775,19.276 18.498,19.987 C18.091,21.565 17.594,23.119 17.009,24.64 C16.823,25.012 17.009,25.198 17.195,25.198 C17.567,25.198 18.684,24.081 19.243,23.336 C19.429,23.336 19.801,23.522 19.801,23.708 C18.875,25.728 16.978,27.133 14.775,27.431 C14.212,27.475 13.716,27.062 13.658,26.5 C13.629,26.058 13.692,25.616 13.844,25.2 C14.402,23.338 14.961,21.663 15.519,19.8 C15.645,19.441 15.708,19.063 15.705,18.683 C15.691,18.483 15.533,18.325 15.333,18.311 C15.147,18.311 14.402,18.87 13.658,20.173 C12.358,22.034 11.424,25.013 10.493,27.433 C10.307,27.991 10.121,27.991 9.562,27.991 C8.445,28.177 7.7,27.991 7.7,27.433 C7.7,27.061 8.817,23.152 9.562,20.359 C9.688,20 9.751,19.622 9.748,19.242 C9.734,19.042 9.576,18.884 9.376,18.87 C9.004,18.87 8.259,19.428 7.514,20.732 C6.266,23.039 5.268,25.473 4.536,27.992 C4.397,28.375 4.008,28.608 3.605,28.55 C2.488,28.736 1.744,28.55 1.744,27.992 C1.744,27.62 3.233,21.849 3.605,20.732 C3.791,19.801 3.791,19.615 3.419,19.801 C2.488,19.801 1.93,20.918 1.557,21.476 C1.371,21.476 0.999,21.29 0.999,21.104 C1.708,19.211 3.452,17.903 5.467,17.753 C7.143,17.568 7.143,18.313 6.957,19.057 Z"/></g></g>
+    </svg>
+  </div>
+  <span>Etapa 1 · Punto de Partida · Ministerio de Energía · Argentina</span>
+  <span>Confidencial — uso interno</span>
+</footer>
+
+</body>
+</html>
