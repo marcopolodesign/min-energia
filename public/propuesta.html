@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propuesta · Ministerio de Energía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent:       #e66065;
+      --accent-light: #f5b5b8;
+      --accent-bg:    rgba(245, 181, 184, 0.18);
+      --black:        #000;
+      --white:        #fff;
+      --gray:         #999;
+      --border:       #d1d5db;
+      --bg:           #f8f8f8;
+      --blue:         #2b6cb0;
+      --blue-light:   #90cdf4;
+      --blue-bg:      rgba(235, 248, 255, 0.45);
+      --font-display: 'Bebas Neue', system-ui, sans-serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --px:           10.5vw;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky; top: 0; z-index: 30;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0 var(--px);
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo svg { height: 22px; width: auto; color: var(--accent); fill: currentColor; }
+    nav { display: flex; gap: 24px; }
+    nav a {
+      font-family: var(--font-display); font-size: 13px;
+      letter-spacing: .06em; text-decoration: none;
+      color: var(--gray); transition: color .15s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 80px var(--px) 72px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-display);
+      font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      letter-spacing: .02em; text-transform: uppercase;
+      color: var(--black); line-height: .95;
+      margin-bottom: 28px;
+    }
+    .hero-title em { color: var(--accent); font-style: normal; }
+    .hero-sub {
+      font-size: 17px; color: #444; max-width: 620px; line-height: 1.6;
+    }
+    .hero-sub strong { font-weight: 600; color: var(--black); }
+    .hero-meta {
+      display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap;
+    }
+    .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .hero-meta-item .hm-label {
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--gray);
+    }
+    .hero-meta-item .hm-val {
+      font-family: var(--font-display); font-size: 22px;
+      letter-spacing: .03em; color: var(--black);
+    }
+
+    /* ── Main ── */
+    main { padding: 0 0 100px; }
+
+    /* ── Product section ── */
+    .product {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .product-left {
+      grid-column: 1 / 5;
+      padding: 64px var(--px) 64px calc(var(--px));
+      border-right: 1px solid var(--border);
+      position: sticky; top: 64px; align-self: start;
+    }
+    .product-num {
+      font-family: var(--font-display); font-size: 120px;
+      line-height: 1; color: var(--accent); opacity: .08;
+      margin-bottom: -20px; margin-left: -6px;
+    }
+    .product-num.blue { color: var(--blue); }
+    .product-tag {
+      display: inline-flex; align-items: center;
+      font-family: var(--font-display); font-size: 11px;
+      letter-spacing: .1em; text-transform: uppercase;
+      background: var(--accent-bg); color: var(--accent);
+      border: 1px solid var(--accent-light);
+      padding: 4px 12px; border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .product-tag.blue { background: var(--blue-bg); color: var(--blue); border-color: var(--blue-light); }
+    .product-title {
+      font-family: var(--font-display); font-size: 38px;
+      letter-spacing: .02em; text-transform: uppercase;
+      color: var(--black); line-height: 1.05; margin-bottom: 16px;
+    }
+    .product-pitch {
+      font-size: 14px; color: #555; line-height: 1.65;
+    }
+    .product-pitch strong { font-weight: 600; color: var(--black); }
+    .launch-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: var(--white);
+      font-size: 11px; font-weight: 700;
+      padding: 4px 12px; border-radius: 100px;
+      margin-top: 24px;
+    }
+    .launch-pill.blue { background: var(--blue); }
+
+    .product-right {
+      grid-column: 5 / 13;
+      padding: 64px var(--px) 64px 48px;
+    }
+
+    /* ── Feature blocks ── */
+    .feature-block {
+      border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 16px;
+    }
+    .feature-block:last-child { margin-bottom: 0; }
+    .fb-header {
+      padding: 16px 22px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .fb-header .fb-icon { font-size: 16px; flex-shrink: 0; }
+    .fb-header h3 { font-size: 13px; font-weight: 700; color: var(--black); }
+    .fb-body { padding: 18px 22px; background: var(--white); }
+    .fb-body p { font-size: 13.5px; color: #444; line-height: 1.55; margin-bottom: 12px; }
+    .fb-body p:last-child { margin-bottom: 0; }
+    .fb-body ul { list-style: none; }
+    .fb-body li {
+      font-size: 13px; color: #444;
+      padding: 6px 0; border-bottom: 1px solid var(--border);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .fb-body li:last-child { border-bottom: none; }
+    .fb-body li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+    .fb-body.blue li::before { color: var(--blue); }
+    .fb-body strong { font-weight: 600; color: var(--black); }
+
+    /* ── Highlight callout ── */
+    .callout {
+      border-radius: 12px;
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-light);
+      padding: 22px 26px;
+      margin-bottom: 16px;
+    }
+    .callout.blue {
+      background: var(--blue-bg);
+      border-color: var(--blue-light);
+    }
+    .callout-label {
+      font-family: var(--font-display); font-size: 12px;
+      letter-spacing: .09em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .callout.blue .callout-label { color: var(--blue); }
+    .callout-text { font-size: 14px; color: var(--black); font-weight: 500; line-height: 1.55; }
+
+    /* ── Timeline section ── */
+    .timeline-section {
+      padding: 64px var(--px);
+    }
+    .tl-title {
+      font-family: var(--font-display); font-size: 34px;
+      letter-spacing: .03em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .tl-subtitle {
+      font-size: 15px; color: #555; margin-bottom: 32px; max-width: 560px;
+    }
+    .tl-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-bottom: 32px;
+    }
+    .tl-month {
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .tl-month-header {
+      padding: 14px 20px;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 10px;
+    }
+    .month-num {
+      font-family: var(--font-display); font-size: 32px;
+      line-height: 1; color: var(--accent); opacity: .25;
+    }
+    .month-name {
+      font-family: var(--font-display); font-size: 16px;
+      letter-spacing: .05em; text-transform: uppercase; color: var(--black);
+    }
+    .tl-month-body { padding: 16px 20px; }
+    .tl-track { margin-bottom: 16px; }
+    .tl-track:last-child { margin-bottom: 0; }
+    .tl-track-label {
+      font-family: var(--font-display); font-size: 10.5px;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 6px;
+      padding-bottom: 4px; border-bottom: 1px solid var(--border);
+    }
+    .tl-track-label.red { color: var(--accent); }
+    .tl-track-label.blue { color: var(--blue); }
+    .tl-item {
+      font-size: 12.5px; color: #444;
+      padding: 3px 0; display: flex; gap: 8px;
+    }
+    .tl-item::before { content: '·'; color: var(--accent); flex-shrink: 0; }
+    .tl-item.blue::before { color: var(--blue); }
+    .delivery {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; color: var(--white);
+      background: var(--accent); padding: 4px 12px; border-radius: 100px;
+      margin-top: 10px;
+    }
+    .delivery.blue { background: var(--blue); }
+
+    .closing-note {
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px 32px; background: var(--bg); max-width: 700px;
+    }
+    .closing-note h3 {
+      font-family: var(--font-display); font-size: 20px;
+      letter-spacing: .04em; text-transform: uppercase;
+      color: var(--black); margin-bottom: 10px;
+    }
+    .closing-note p { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 8px; }
+    .closing-note p:last-child { margin-bottom: 0; }
+    .closing-note strong { font-weight: 600; color: var(--black); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 32px var(--px);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11.5px; color: var(--gray);
+    }
+    footer .logo svg { height: 16px; color: var(--accent); fill: currentColor; }
+
+    @media (max-width: 900px) {
+      :root { --px: 6vw; }
+      .product { grid-template-columns: 1fr; }
+      .product-left { grid-column: 1; position: static; border-right: none; border-bottom: 1px solid var(--border); padding: 40px var(--px); }
+      .product-right { grid-column: 1; padding: 40px var(--px); }
+      .tl-grid { grid-template-columns: 1fr; }
+      .product-num { font-size: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="logo">
+    <svg viewBox="0 0 105 28" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" fill-rule="evenodd"><g transform="translate(-1,-1)"><path d="M6.957,19.057 L6.212,22.04 C7.329,19.992 9.19,17.2 11.238,17.014 C11.618,16.935 12.013,17.038 12.306,17.294 C12.598,17.549 12.754,17.927 12.727,18.314 C12.556,19.386 12.307,20.443 11.982,21.479 C13.471,18.687 15.333,16.639 17.008,16.453 C17.869,16.35 18.67,16.91 18.87,17.753 C18.901,18.515 18.775,19.276 18.498,19.987 C18.091,21.565 17.594,23.119 17.009,24.64 C16.823,25.012 17.009,25.198 17.195,25.198 C17.567,25.198 18.684,24.081 19.243,23.336 C19.429,23.336 19.801,23.522 19.801,23.708 C18.875,25.728 16.978,27.133 14.775,27.431 C14.212,27.475 13.716,27.062 13.658,26.5 C13.629,26.058 13.692,25.616 13.844,25.2 C14.402,23.338 14.961,21.663 15.519,19.8 C15.645,19.441 15.708,19.063 15.705,18.683 C15.691,18.483 15.533,18.325 15.333,18.311 C15.147,18.311 14.402,18.87 13.658,20.173 C12.358,22.034 11.424,25.013 10.493,27.433 C10.307,27.991 10.121,27.991 9.562,27.991 C8.445,28.177 7.7,27.991 7.7,27.433 C7.7,27.061 8.817,23.152 9.562,20.359 C9.688,20 9.751,19.622 9.748,19.242 C9.734,19.042 9.576,18.884 9.376,18.87 C9.004,18.87 8.259,19.428 7.514,20.732 C6.266,23.039 5.268,25.473 4.536,27.992 C4.397,28.375 4.008,28.608 3.605,28.55 C2.488,28.736 1.744,28.55 1.744,27.992 C1.744,27.62 3.233,21.849 3.605,20.732 C3.791,19.801 3.791,19.615 3.419,19.801 C2.488,19.801 1.93,20.918 1.557,21.476 C1.371,21.476 0.999,21.29 0.999,21.104 C1.708,19.211 3.452,17.903 5.467,17.753 C7.143,17.568 7.143,18.313 6.957,19.057 Z"/></g></g>
+    </svg>
+  </div>
+  <nav>
+    <a href="#simulador">Simulación</a>
+    <a href="#generador">Comunicación</a>
+    <a href="#timeline">Timeline</a>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-eyebrow">Ministerio de Energía · Argentina · Propuesta inicial</div>
+  <h1 class="hero-title">Del dato<br>a la <em>decisión.</em><br>De la decisión<br>a la <em>comunicación.</em></h1>
+  <p class="hero-sub">
+    Trabajamos sobre la infraestructura de datos existente para agregar dos capacidades concretas: <strong>simular el impacto de una decisión de política energética antes de tomarla</strong>, y <strong>convertir los resultados en comunicación institucional lista para publicar</strong>. Dos meses, dos productos.
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hm-label">Productos</span>
+      <span class="hm-val">2</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hm-label">Timeline</span>
+      <span class="hm-val">12–14 semanas</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hm-label">Inicio</span>
+      <span class="hm-val">Sep 2026</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hm-label">Entrega</span>
+      <span class="hm-val">Dic 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main>
+
+  <!-- ─── PRODUCTO 1: SIMULADOR ─── -->
+  <div class="product" id="simulador">
+    <div class="product-left">
+      <div class="product-num">01</div>
+      <div class="product-tag">Simulación de política</div>
+      <h2 class="product-title">Motor de simulación energética</h2>
+      <p class="product-pitch">
+        Una interfaz que permite explorar escenarios de focalización sobre el padrón ReSEF — cambiando variables y viendo al instante el impacto en beneficiarios, cobertura geográfica y costo fiscal. Foco inicial en zona fría.
+      </p>
+      <span class="launch-pill">🚀 Semanas 12–14 · Dic 2026</span>
+    </div>
+
+    <div class="product-right">
+
+      <div class="callout">
+        <div class="callout-label">El valor central</div>
+        <div class="callout-text">Pasar de "¿qué pasaría si cambiamos el umbral de ingreso?" como pregunta abierta, a tenerla respondida en segundos — con números, con mapa, con comparativo contra el escenario actual.</div>
+      </div>
+
+      <div class="feature-block">
+        <div class="fb-header">
+          <span class="fb-icon">⚙️</span>
+          <h3>Variables de simulación</h3>
+        </div>
+        <div class="fb-body">
+          <ul>
+            <li>Umbral de ingreso (múltiplos de CBT)</li>
+            <li>Zona tarifaria — foco inicial en zona fría (Patagonia, NOA, NEA)</li>
+            <li>Categoría residencial (R1 / R2 / R3)</li>
+            <li>Porcentaje de subsidio aplicado</li>
+            <li>Fecha de corte del padrón</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="fb-header">
+          <span class="fb-icon">📊</span>
+          <h3>Resultados y comparativos</h3>
+        </div>
+        <div class="fb-body">
+          <ul>
+            <li>Beneficiarios proyectados vs. escenario actual</li>
+            <li>Variación de cobertura por localidad y provincia</li>
+            <li>Impacto fiscal estimado (costo anual)</li>
+            <li>Historial de escenarios para comparar alternativas antes de decidir</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="fb-header">
+          <span class="fb-icon">🗺️</span>
+          <h3>Mapa integrado en la simulación</h3>
+        </div>
+        <div class="fb-body">
+          <p>El mapa no es una visualización aparte — es parte del flujo de simulación. Cada cambio de parámetro lo actualiza en tiempo real, mostrando exactamente dónde y cuánto impacta cada decisión.</p>
+          <ul>
+            <li>Coroplético por localidad con intensidad según impacto</li>
+            <li>Capa diferencial de variación de cobertura</li>
+            <li>Zoom y detalle por provincia con un click</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── PRODUCTO 2: GENERADOR ─── -->
+  <div class="product" id="generador">
+    <div class="product-left">
+      <div class="product-num blue">02</div>
+      <div class="product-tag blue">Comunicación institucional</div>
+      <h2 class="product-title">Generador de comunicación</h2>
+      <p class="product-pitch">
+        Una herramienta que toma los datos del padrón y produce piezas de comunicación institucional listas para publicar — infografías, tablas de prensa, mapas en alta resolución — con identidad visual del Ministerio, en minutos.
+      </p>
+      <span class="launch-pill blue">🚀 Semanas 12–14 · Dic 2026</span>
+    </div>
+
+    <div class="product-right">
+
+      <div class="callout blue">
+        <div class="callout-label">El valor central</div>
+        <div class="callout-text">El equipo de comunicación genera lo que necesita en el momento en que lo necesita, sin depender de un proceso de producción manual para cada nota, campaña o presentación.</div>
+      </div>
+
+      <div class="feature-block">
+        <div class="fb-header">
+          <span class="fb-icon">🖼️</span>
+          <h3>Infografías con identidad institucional</h3>
+        </div>
+        <div class="fb-body blue">
+          <ul>
+            <li>Selección de provincia, período y métrica — el sistema genera la pieza</li>
+            <li>Descarga en PNG y SVG con estilos del Ministerio incorporados</li>
+            <li>Formatos adaptados a redes sociales, presentaciones y comunicados de prensa</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="fb-header">
+          <span class="fb-icon">📄</span>
+          <h3>Tablas y reportes exportables</h3>
+        </div>
+        <div class="fb-body blue">
+          <ul>
+            <li>Ranking de provincias por cobertura en PDF y Excel</li>
+            <li>Comparativas listas para adjuntar a comunicados oficiales</li>
+            <li>Mapas en alta resolución para conferencias y presentaciones</li>
+            <li>Texto de prensa autogenerado con los datos clave del período</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-block">
+        <div class="fb-header">
+          <span class="fb-icon">🔄</span>
+          <h3>Siempre actualizado</h3>
+        </div>
+        <div class="fb-body blue">
+          <p>Cada pieza generada refleja los datos más recientes del padrón. No hay versiones desactualizadas ni proceso de sincronización manual — el generador consume directamente la fuente.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── TIMELINE ─── -->
+  <div class="timeline-section" id="timeline">
+    <div class="tl-title">12 a 14 semanas</div>
+    <p class="tl-subtitle">Ambos productos se desarrollan en paralelo sobre la misma base de datos, con capacitación al equipo de la Secretaría a lo largo de todo el proceso.</p>
+
+    <div class="tl-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+      <div class="tl-month">
+        <div class="tl-month-header">
+          <span class="month-num">S1–4</span>
+          <span class="month-name">Septiembre 2026</span>
+        </div>
+        <div class="tl-month-body">
+          <div class="tl-track">
+            <div class="tl-track-label red">Simulación</div>
+            <div class="tl-item">Procesamiento del padrón zona fría</div>
+            <div class="tl-item">Arquitectura técnica y base de datos</div>
+            <div class="tl-item">Motor de cálculo — primeras variables</div>
+          </div>
+          <div class="tl-track" style="margin-top:14px;">
+            <div class="tl-track-label blue">Comunicación</div>
+            <div class="tl-item blue">Diseño de templates institucionales</div>
+            <div class="tl-item blue">Conexión a datos del padrón</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-month">
+        <div class="tl-month-header">
+          <span class="month-num">S5–9</span>
+          <span class="month-name">Octubre – Nov 2026</span>
+        </div>
+        <div class="tl-month-body">
+          <div class="tl-track">
+            <div class="tl-track-label red">Simulación</div>
+            <div class="tl-item">Interfaz con variables editables completas</div>
+            <div class="tl-item">Mapa integrado + capa diferencial</div>
+            <div class="tl-item">Historial y comparador de escenarios</div>
+          </div>
+          <div class="tl-track" style="margin-top:14px;">
+            <div class="tl-track-label blue">Comunicación</div>
+            <div class="tl-item blue">Infografías, tablas y mapas automáticos</div>
+            <div class="tl-item blue">Exportación PDF / PNG / Excel</div>
+            <div class="tl-item blue">Texto de prensa autogenerado</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-month">
+        <div class="tl-month-header">
+          <span class="month-num">S10–14</span>
+          <span class="month-name">Noviembre – Dic 2026</span>
+        </div>
+        <div class="tl-month-body">
+          <div class="tl-track">
+            <div class="tl-track-label red">Simulación</div>
+            <div class="tl-item">Iteración con el equipo</div>
+            <div class="tl-item">Capacitación y transferencia</div>
+            <span class="delivery">🚀 Lanzamiento</span>
+          </div>
+          <div class="tl-track" style="margin-top:14px;">
+            <div class="tl-track-label blue">Comunicación</div>
+            <div class="tl-item blue">Ajuste con equipo de comunicación</div>
+            <div class="tl-item blue">Documentación y autonomía</div>
+            <span class="delivery blue">🚀 Lanzamiento</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="closing-note">
+      <h3>Cómo encaja con lo que ya existe</h3>
+      <p>El punto de partida es la infraestructura de datos y las herramientas que la Secretaría ya tiene en funcionamiento. Lo que sumamos se construye sobre esa base — sin reemplazar nada, integrando lo que el equipo ya conoce y agrega las capacidades de análisis y comunicación que se identificaron como prioritarias.</p>
+      <p>La capacitación al equipo es parte del proceso, no un paso separado. El objetivo es que al terminar las ocho semanas, la Secretaría pueda operar y evolucionar las herramientas de forma autónoma.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="logo">
+    <svg viewBox="0 0 105 28" xmlns="http://www.w3.org/2000/svg">
+      <g fill="currentColor" fill-rule="evenodd"><g transform="translate(-1,-1)"><path d="M6.957,19.057 L6.212,22.04 C7.329,19.992 9.19,17.2 11.238,17.014 C11.618,16.935 12.013,17.038 12.306,17.294 C12.598,17.549 12.754,17.927 12.727,18.314 C12.556,19.386 12.307,20.443 11.982,21.479 C13.471,18.687 15.333,16.639 17.008,16.453 C17.869,16.35 18.67,16.91 18.87,17.753 C18.901,18.515 18.775,19.276 18.498,19.987 C18.091,21.565 17.594,23.119 17.009,24.64 C16.823,25.012 17.009,25.198 17.195,25.198 C17.567,25.198 18.684,24.081 19.243,23.336 C19.429,23.336 19.801,23.522 19.801,23.708 C18.875,25.728 16.978,27.133 14.775,27.431 C14.212,27.475 13.716,27.062 13.658,26.5 C13.629,26.058 13.692,25.616 13.844,25.2 C14.402,23.338 14.961,21.663 15.519,19.8 C15.645,19.441 15.708,19.063 15.705,18.683 C15.691,18.483 15.533,18.325 15.333,18.311 C15.147,18.311 14.402,18.87 13.658,20.173 C12.358,22.034 11.424,25.013 10.493,27.433 C10.307,27.991 10.121,27.991 9.562,27.991 C8.445,28.177 7.7,27.991 7.7,27.433 C7.7,27.061 8.817,23.152 9.562,20.359 C9.688,20 9.751,19.622 9.748,19.242 C9.734,19.042 9.576,18.884 9.376,18.87 C9.004,18.87 8.259,19.428 7.514,20.732 C6.266,23.039 5.268,25.473 4.536,27.992 C4.397,28.375 4.008,28.608 3.605,28.55 C2.488,28.736 1.744,28.55 1.744,27.992 C1.744,27.62 3.233,21.849 3.605,20.732 C3.791,19.801 3.791,19.615 3.419,19.801 C2.488,19.801 1.93,20.918 1.557,21.476 C1.371,21.476 0.999,21.29 0.999,21.104 C1.708,19.211 3.452,17.903 5.467,17.753 C7.143,17.568 7.143,18.313 6.957,19.057 Z"/></g></g>
+    </svg>
+  </div>
+  <span>Propuesta Inicial · Ministerio de Energía · Argentina · 2026</span>
+  <span>Confidencial — uso interno</span>
+</footer>
+
+</body>
+</html>
